@@ -1,7 +1,5 @@
 import React from "react";
-// import type {Params} from "react-router-dom";
-import type {AxiosResponse} from "axios";
-import type ResponseType from "../types/ResponseType.ts";
+import axios from "axios";
 import type {Anime} from "../types/Anime.ts";
 import {getFromApi} from "../functions/requestFunctions.ts";
 import "../css/base.scss"
@@ -15,6 +13,7 @@ export type BaseProps = {
 export type BaseState = {
     err:boolean,
     errReason:string,
+    status?:string,
 }
 
 abstract class BasePage<P extends BaseProps, S extends BaseState> extends React.Component<P, S>{
@@ -25,7 +24,13 @@ abstract class BasePage<P extends BaseProps, S extends BaseState> extends React.
     }
 
     protected getError(){
-        return <h1>Erro ao carregar a pagina: {}</h1>
+        return (
+        <div className="error-wrapper">
+            <p className="error"><b>Erro ao carregar a pagina: </b></p>
+            <p className="error-reason">{this.state.errReason}</p>
+            <p className="error-status">{this.state.status}</p>
+        </div>
+        )
     }
 
     protected idNotFound(type:string){
@@ -36,18 +41,24 @@ abstract class BasePage<P extends BaseProps, S extends BaseState> extends React.
     }
 
     protected async getAnime(id:string):Promise<Anime|null>{
-        try{
-            const res:AxiosResponse<ResponseType<Anime>> = await getFromApi<Anime>(`/anime/${id}`, null)
-            if(res.status !== 200 && !res.data.data){
-                this.setState({err: true})
-                return null
+        try {
+            return (await getFromApi<Anime|null>(`/anime/${id}`, null)).data.data;
+        } catch (error: unknown) {
+            let errReason: string = "";
+            let status: string = "";
+            if (axios.isAxiosError(error)) {
+                errReason = error.message
+                status = error.code!
+                console.error(error);
+            } else {
+                console.error("Erro desconhecido", error);
             }
-            return res.data.data
-            // console.log(data)
-            // this.setState({ani:data})
-        }catch(e){
-            console.log(e)
-            return null
+            this.setState({
+                err: true,
+                errReason: "Anime não encontrado ou erro no servidor. - "+ errReason,
+                status: status
+            });
+            return null;
         }
     }
 

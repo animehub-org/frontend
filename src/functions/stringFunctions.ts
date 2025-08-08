@@ -21,7 +21,6 @@ export function getEpTime(ee:number):string{
 }
 export function trim(string:string,maxLength:number = 120):string{
     let t = string.substring(0, maxLength - 3);
-    console.log(t)
     t = t.substring(0,Math.min(t.length,t.lastIndexOf(" ")))+"..."
     return t
 }

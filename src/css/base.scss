@@ -80,6 +80,26 @@ h3 {
     color: #fff;
 }
 
+.error-wrapper{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+
+    .error{
+        margin: 0;
+    }
+
+    .error-reason , .error-status{
+        margin: 0;
+        color: var(--light_gray)
+    }
+    .error-status{
+        font-size: .6rem;
+    }
+}
+
 button {
     line-height: inherit;
     text-transform: none;

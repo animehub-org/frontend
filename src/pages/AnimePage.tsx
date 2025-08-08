@@ -94,11 +94,13 @@ class AnimePage extends BasePage<Props, State>{
 
     async componentDidMount(){
         const anime = await super.getAnime(this.props.params.id)
-        this.setState({anime})
-        if(anime){
-            this.setState({selectedSeasonId:anime.seasons[0].id})
-            document.title = `Animefoda ${anime.name}`
-        }
+        if (!anime) return; // já setou err dentro do getAnime
+
+        this.setState({
+            anime,
+            selectedSeasonId: anime.seasons[0].id
+        });
+        document.title = `Animefoda ${anime.name}`
     }
 
     private stateTypeToStateEnum(input: AnimeState): StateName{
@@ -211,7 +213,7 @@ class AnimePage extends BasePage<Props, State>{
                     {anime.seasons.map((season)=>(
                         <div style={{display: season.id === selectedSeasonId ? 'block' : 'none'}} key={season.index}>
                             {season.episodes.sort((a,b)=>a.epIndex-b.epIndex).map(ep=>(
-                                <EpisodeLink episode={ep}/>
+                                <EpisodeLink episode={ep} key={ep.epIndex}/>
                             ))}
                         </div>
                     ))}
