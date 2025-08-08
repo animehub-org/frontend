@@ -8,13 +8,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router>
-                <UserProvider>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                    </Routes>
-                </UserProvider>
-            </Router>
+            <>
+                {/*<Header/>*/}
+                <Router>
+                    <UserProvider>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                        </Routes>
+                    </UserProvider>
+                </Router>
+                {/*<Footer/>*/}
+            </>
         )
     }
 }

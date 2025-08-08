@@ -17,7 +17,7 @@
         }
 
         .search-container {
-            position: absolute; // <-- isso permite centralizar independentemente do flex
+            position: absolute;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -32,8 +32,7 @@
             input{
                 background: transparent;
                 border: none;
-                border-radius: 1em;
-                padding: .2em 1em;
+                padding: .2em 0;
                 color: white;
 
                 &:focus{

@@ -1,6 +1,8 @@
-import {Header} from "../components/Header.tsx";
 import React from "react";
 import "../css/base.scss"
+import RecentAnime from "../components/home/RecentAnime.tsx";
+import "../css/home.scss"
+import {Header} from "../components/Header.tsx";
 import Footer from "../components/Footer.tsx";
 
 class Home extends React.Component{
@@ -12,9 +14,8 @@ class Home extends React.Component{
     render(){
         return(
             <>
-                <Header></Header>
-                {/*<p>aaaaa</p>*/}
-                <div className="main-home"></div>
+                <Header/>
+                <RecentAnime/>
                 <Footer/>
             </>
         )

@@ -20,9 +20,10 @@
     a{
         text-decoration: none;
         transition: all 0.3s;
-    }
-    a:hover{
-        color: rgb(189,189,189);
+
+        &:hover{
+            color: rgb(189,189,189);
+        }
     }
     p{
         font-size: 1.25em;

@@ -2,13 +2,14 @@ import axios, {AxiosError, type AxiosResponse} from "axios";
 // import {apiUrl} from "../const";
 import type ResponseType from "../types/ResponseType";
 import {getDeviceIndentifier} from "./userFunctions";
+import {API_URL} from "../Consts.ts";
 
 export async function getFromApi<T>(url: string, headers: object | null = null): Promise<AxiosResponse<ResponseType<T>>> {
     const header = {
         "Content-Type": "application/json",
         ...headers
     }
-    const response = await axios.get<ResponseType<T>>(`${import.meta.env.API_URL}/g${url}`,{
+    const response = await axios.get<ResponseType<T>>(`${API_URL}/g${url}`,{
         headers: header
     });
     if(response.status !== 200){
@@ -22,7 +23,7 @@ export async function postToApi<T,R>(url: string, data: T, headers: object | nul
         "Content-Type": "application/json",
         ...headers
     }
-    const response = await axios.post<ResponseType<R>>(`${import.meta.env.API_URL}/p${url}`, data,{
+    const response = await axios.post<ResponseType<R>>(`${API_URL}/p${url}`, data,{
         headers:header
     })
     if(response.status !== 200){
