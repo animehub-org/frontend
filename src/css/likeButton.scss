@@ -1,0 +1,24 @@
+.like-button {
+    background: var(--gray);
+    border-radius: 50%;
+    padding-top:3px;
+    width: 2.5em;
+    height: 2.5em;
+    //margin-left: 1em;
+    border: 3px white outset;
+    transition: all .2s;
+    outline: none;
+
+    &:hover{
+        background: var(--gray-dark);
+    }
+
+}
+.selected{
+    background: var(--red);
+    border: 4px rgb(131,0,0) outset;
+
+    &:hover{
+        background: red;
+    }
+}

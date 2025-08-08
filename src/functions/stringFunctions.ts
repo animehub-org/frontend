@@ -25,3 +25,7 @@ export function trim(string:string,maxLength:number = 120):string{
     t = t.substring(0,Math.min(t.length,t.lastIndexOf(" ")))+"..."
     return t
 }
+export function formatNewLines(text: string): string {
+    const fixedText = text.replace(/\\n\\n/g, '\n');
+    return fixedText.replace(/\n/g, '<br />');
+}

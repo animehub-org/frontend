@@ -5,6 +5,8 @@ import type ResponseType from "../types/ResponseType.ts";
 import type {Anime} from "../types/Anime.ts";
 import {getFromApi} from "../functions/requestFunctions.ts";
 import "../css/base.scss"
+import Footer from "../components/Footer.tsx";
+import {Header} from "../components/Header.tsx";
 
 export type BaseProps = {
     params: object
@@ -33,19 +35,32 @@ abstract class BasePage<P extends BaseProps, S extends BaseState> extends React.
         })
     }
 
-    protected async getAnime(id:string){
+    protected async getAnime(id:string):Promise<Anime|null>{
         try{
             const res:AxiosResponse<ResponseType<Anime>> = await getFromApi<Anime>(`/anime/${id}`, null)
-            if(res.status !== 200){
+            if(res.status !== 200 && !res.data.data){
                 this.setState({err: true})
-                return
+                return null
             }
             return res.data.data
             // console.log(data)
             // this.setState({ani:data})
         }catch(e){
             console.log(e)
+            return null
         }
+    }
+
+    protected abstract renderContent(): React.ReactNode;
+
+    render(){
+        return(
+            <>
+                <Header/>
+                    {this.state.err ? this.getError() : this.renderContent()}
+                <Footer/>
+            </>
+        )
     }
 }
 

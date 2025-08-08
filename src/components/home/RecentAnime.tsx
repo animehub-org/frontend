@@ -20,7 +20,7 @@ class AnimePoster extends React.PureComponent<AnimePosterProps>{
                 <div className="highlight">
                     <div className="hover"/>
                     <div className="img">
-                        <img src={`${CDN_URL}/ani/img/${anime.id}.jpg`} alt={anime.name} />
+                        <img src={`${CDN_URL}/ani/img/${anime.id}/${anime.id}.jpg`} alt={anime.name} />
                     </div>
                     <div className="body">
                         <div className='time'>
